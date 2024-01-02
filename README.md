@@ -59,7 +59,6 @@ Convert a standard function to use ES6’s arrow syntax.
 
 ...
 
-_(Tasks 3 to 14 are outlined in a similar detailed format)_
 
 ---
 
