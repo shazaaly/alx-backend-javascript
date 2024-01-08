@@ -5,7 +5,7 @@ export default function cleanSet(set, startString) {
     return '';
   }
   for (const item of set) {
-    if (item.startsWith(startString)) {
+    if (item && item.startsWith(startString)) {
       const strSlice = item.slice(startString.length);
       if (str !== '') {
         /* Add hyphen only if it's not the first item, By adding the hyphen
