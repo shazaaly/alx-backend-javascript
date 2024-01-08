@@ -1,5 +1,9 @@
 export default function cleanSet(set, startString) {
   let str = '';
+
+  if (startString === '') {
+    return '';
+  }
   for (const item of set) {
     if (item.startsWith(startString)) {
       const strSlice = item.slice(startString.length);
