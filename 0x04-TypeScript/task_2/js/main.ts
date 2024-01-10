@@ -52,6 +52,13 @@ const createEmployee = (salary: number | string): Director | Teacher => {
 	}
 }
 
-console.log(createEmployee(200));
-console.log(createEmployee(1000));
-console.log(createEmployee('$500'));
+/*
+Write a function isDirector:
+
+it accepts employee as an argument
+it will be used as a type predicate and if the employee is a director
+*/
+
+
+
+
