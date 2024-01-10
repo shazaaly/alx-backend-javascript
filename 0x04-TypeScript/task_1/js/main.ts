@@ -48,3 +48,7 @@ class StudentClass implements classInterface{
 	}
 
 }
+
+const student = new StudentClass("Shaza", "Aly");
+console.log(student.displayName())
+console.log(student.workOnHomework())

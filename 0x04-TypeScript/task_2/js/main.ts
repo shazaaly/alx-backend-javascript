@@ -1,50 +1,57 @@
-interface Teacher{
-	readonly firstName : string;
-	readonly lastName: string;
-	fullTimeEmployee:boolean;
-	yearsOfExperience?: Number;
-	location: string;
-	[key : string] : any
+
+
+interface DirectorInterface{
+	workFromHome():string
+	getCoffeeBreak():string
+	workDirectorTasks():string
 
 }
 
-interface Directors extends Teacher{
-	numberOfReports: Number
 
-
-}
-
-interface printTeacherFunction{
-	(firstName:string, lastName:string):string
-}
-
-const printTeacher:printTeacherFunction= (firstName:string, lastName:string)=>{
-	return `${firstName.charAt(0)}.${lastName}`
+interface TeacherInterface{
+	workFromHome():string
+	getCoffeeBreak():string
+	workTeacherTasks():string
 
 }
-// console.log(printTeacher("shaza", "aly")); /*s.aly*/
-interface classInterface{
-	firstName :string;
-	lastName: string;
-	workOnHomework ():string
-	displayName(): string
-}
 
-class StudentClass implements classInterface{
-	firstName:string
-	lastName:string
-	constructor(firstname:string, lastName:string){
-		this.firstName= firstname
-		this.lastName =lastName
-
-	}
-	workOnHomework():string{
-		return `Currently working`
-	}
-	displayName():string{
-		return this.firstName
-
-
+class Director implements DirectorInterface{
+	workFromHome(): string {
+		return `Working from home`;
 	}
 
+	getCoffeeBreak(): string {
+		return `Getting a coffee break`;
+	}
+
+	workDirectorTasks(): string {
+		return `Getting to director tasks`;
+	}
 }
+
+
+class Teacher  implements TeacherInterface{
+	workFromHome(): string {
+		return `Cannot work from home`;
+	}
+
+	getCoffeeBreak(): string {
+		return `Cannot have a break`;
+	}
+
+	workTeacherTasks(): string {
+		return `Getting to work`;
+	}
+}
+
+const createEmployee = (salary: number | string): Director | Teacher => {
+	if(Number(salary) < 500){
+		return new Teacher()
+	}else{
+		return new Director()
+	}
+}
+
+console.log(createEmployee(200));
+console.log(createEmployee(1000));
+console.log(createEmployee('$500'));
