@@ -1,23 +1,19 @@
-interface Student{
-	firstName : string;
-	lastName: string;
-	age:Number;
-	location: string
+interface Teacher{
+	readonly firstName : string;
+	readonly lastName: string;
+	fullTimeEmployee:boolean;
+	yearsOfExperience?: Number;
+	location: string;
+	[key : string] : any
 
 }
 
-let std1 : Student = {
-	firstName : "shaza",
-	lastName: "Aly",
-	age:10;
-	location: "Cairo"
+const teacher3: Teacher = {
+	firstName: 'John',
+	fullTimeEmployee: false,
+	lastName: 'Doe',
+	location: 'London',
+	contract: false,
+  };
 
-}
-let std2 : Student = {
-	firstName : "Ahmed",
-	lastName: "Aly",
-	age:12,
-	location: "USA"
-}
-let studentsList : Array<Student> = [std1, std2]
-
+  console.log(teacher3);
