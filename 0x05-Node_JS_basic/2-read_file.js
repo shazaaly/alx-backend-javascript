@@ -1,19 +1,26 @@
 const fs = require('fs');
 
-const path = './database.csv';
 const students = {};
 
 function countStudents(path) {
   try {
     const data = fs.readFileSync(path, 'utf8');
+    if (!data) {
+        console.log('Cannot load the database');
+        return
+    }
     const lines = data.split('\n');
     lines.shift();
     lines.forEach((line) => {
-      const [firstname, , , field] = line.split(',');
-      if (!students[field]) {
-        students[field] = [];
-      }
-      students[field].push(firstname);
+        if (line.trim() !== ''){
+            const [firstname, , , field] = line.split(',');
+            if (!students[field]) {
+              students[field] = [];
+            }
+            students[field].push(firstname);
+            
+        }
+
     });
     const fields = Object.keys(students);
     fields.forEach((field) => {
@@ -24,4 +31,4 @@ function countStudents(path) {
   }
 }
 
-countStudents(path);
+module.exports = countStudents;
