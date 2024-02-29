@@ -15,13 +15,13 @@ function readDatabase(filePath) {
         students[field].push(firstname);
       });
 
-      let output = `Number of students: ${lines.length}\n`;
+      // let output = `Number of students: ${lines.length}\n`;
 
-      Object.keys(students).forEach((field) => {
-        output += `Number of students in ${field}: ${students[field].length}. List: ${students[field].join(', ')}\n`;
-      });
+      // Object.keys(students).forEach((field) => {
+      //   output += `Number of students in ${field}: ${students[field].length}. List: ${students[field].join(', ')}\n`;
+      // });
 
-      return output;
+      return students;
     })
     .catch((err) => {
       throw Error(err);
