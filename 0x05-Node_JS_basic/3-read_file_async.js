@@ -1,33 +1,40 @@
-const fs = require('fs');
+const { readFile } = require('fs');
 
-function countStudents(path) {
+function countStudents(fileName) {
+  const students = {};
+  const fields = {};
+  let length = 0;
   return new Promise((resolve, reject) => {
-    fs.readFile(path, 'utf8', (err, data) => {
-      if (err) {
+    readFile(fileName, (error, data) => {
+      if (error) {
         reject(Error('Cannot load the database'));
-        return;
-      }
-
-      const lines = data.split('\n').filter((line) => line.trim());
-      lines.shift(); // Remove header
-
-      const students = {};
-      lines.forEach((line) => {
-        const [firstname, , , field] = line.split(',');
-        if (!students[field]) {
-          students[field] = [];
+      } else {
+        const lines = data.toString().split('\n');
+        for (let i = 0; i < lines.length; i += 1) {
+          if (lines[i]) {
+            length += 1;
+            const field = lines[i].toString().split(',');
+            if (Object.prototype.hasOwnProperty.call(students, field[3])) {
+              students[field[3]].push(field[0]);
+            } else {
+              students[field[3]] = [field[0]];
+            }
+            if (Object.prototype.hasOwnProperty.call(fields, field[3])) {
+              fields[field[3]] += 1;
+            } else {
+              fields[field[3]] = 1;
+            }
+          }
         }
-        students[field].push(firstname);
-      });
-
-      let output = ''
-
-      let total = `Number of students: ${lines.length}\n`; // Log total number of students
-
-      Object.keys(students).forEach((field) => {
-        output += total + `Number of students in ${field}: ${students[field].length}. List: ${students[field].join(', ')}`;
-      });
-      resolve(output);
+        const l = length - 1;
+        console.log(`Number of students: ${l}`);
+        for (const [key, value] of Object.entries(fields)) {
+          if (key !== 'field') {
+            console.log(`Number of students in ${key}: ${value}. List: ${students[key].join(', ')}`);
+          }
+        }
+        resolve(data);
+      }
     });
   });
 }
