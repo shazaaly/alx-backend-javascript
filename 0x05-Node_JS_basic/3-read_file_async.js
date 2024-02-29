@@ -20,12 +20,14 @@ function countStudents(path) {
         students[field].push(firstname);
       });
 
-      console.log(`Number of students: ${lines.length}`); // Log total number of students
+      let output = ''
+
+      let total = `Number of students: ${lines.length}\n`; // Log total number of students
 
       Object.keys(students).forEach((field) => {
-        console.log(`Number of students in ${field}: ${students[field].length}. List: ${students[field].join(', ')}`);
+        output += total + `Number of students in ${field}: ${students[field].length}. List: ${students[field].join(', ')}`;
       });
-      resolve(data);
+      resolve(output);
     });
   });
 }
