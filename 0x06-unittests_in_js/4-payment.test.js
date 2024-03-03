@@ -1,23 +1,16 @@
 const {describe, it} = require("mocha");
 const sinon = require("sinon");
-const sendPaymentRequestToApi = require("./5-payment");
-const expect = require("chai").expect;
+const sendPaymentRequestToApi = require("./4-payment");
+const Utils = require("./utils");
+const assert = require("assert");
 
 describe("sendPaymentRequestToApi", function() {
-    beforeEach("Set up spy to use for each test", function() {
-	sinon.spy(console, "log");
-    });
-    afterEach("restore spy after each test", function() {
-	console.log.restore();
-    });
-    it("check that console.log is called with the right arg", function() {
+    it("check that Utils.calculateNumber is stubbed", function() {
+	const spy = sinon.spy(console, "log");
+	const stub = sinon.stub(Utils, "calculateNumber").returns(10);
 	sendPaymentRequestToApi(100, 20);
 
-	expect(console.log.withArgs("The total is: 120").calledOnce).to.be.true;
-    });
-    it("check that console.log is called with the right arg", function() {
-	sendPaymentRequestToApi(10, 10);
-
-	expect(console.log.withArgs("The total is: 20").calledOnce).to.be.true;
+	assert(spy.withArgs("The total is: 10").calledOnce);
+	assert(stub.withArgs("SUM", 100, 20).calledOnce);
     });
 });
